@@ -1,1 +1,1 @@
-Doing the debug on the python file find the debug, you can find the error of zero divission error, that could be solutionated with a try and except zero divission error into the function.
+Doing the debug on the python file find the debug, you can find the error of zero division error, that could be solutionated with a try and except zero division error into the function.
