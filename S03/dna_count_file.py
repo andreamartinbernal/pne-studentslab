@@ -1,20 +1,29 @@
-def read_csv_file(filename):
-    list_of_dictionaries = []
-    try:
+dict_dna = {}
+total = 0
+with open("dna_file.txt", "r") as f:
+    for line in f:
+        for i in line:
+            if i == 'A':
+                if i not in dict_dna:
+                    dict_dna['A'] = 1
+                else:
+                    dict_dna['A'] += 1
+            elif i == 'C':
+                if i not in dict_dna:
+                    dict_dna['C'] = 1
+                else:
+                    dict_dna['C'] += 1
+            elif i == 'T':
+                if i not in dict_dna:
+                    dict_dna['T'] = 1
+                else:
+                    dict_dna['T'] += 1
+            elif i == 'G':
+                if i not in dict_dna:
+                    dict_dna['G'] = 1
+                else:
+                    dict_dna['G'] += 1
 
-        with open(filename, "r", encoding="latin-1") as f:
-            header = next(f).replace("\n", "").split(",")
-            for line in f:
-                components = line.replace("\n", "").split(",")
-                d = dict(zip(header, components))
-                list_of_dictionaries.append(d)
-        f.close()
-
-    except FileNotFoundError:
-        print("ERROR: file", filename, "not found. Exiting.")
-        exit()
-    except PermissionError:
-        print("ERROR: No permissions for file", filename, "Exiting.")
-        exit()
-
-    return list_of_dictionaries
+for key in dict_dna:
+    total += dict_dna[key]
+print("Introduce the sequence:", f, "\nTotal length:", total, "\n", dict_dna)
