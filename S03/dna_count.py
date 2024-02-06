@@ -34,17 +34,17 @@ print("Number of times that letter 'T' appears in the sentence:",numberT)
 sequence = input("Please enter a sequence: ")
 number_of_bases = len(sequence)
 print("Total length: " , number_of_bases)
-dic = {"A" : 0 , "C" : 0 , "G" : 0 , "T" : 0}
+dic_dna = {"A" : 0 , "C" : 0 , "G" : 0 , "T" : 0}
 for c in sequence:
     if c == "A":
-        dic["A"] += 1
+        dic_dna["A"] += 1
     if c == "C":
-        dic["C"] += 1
+        dic_dna["C"] += 1
     if c == "G":
-        dic["G"] += 1
+        dic_dna["G"] += 1
     if c == "T":
-        dic["T"] += 1
+        dic_dna["T"] += 1
     else:
        pass
-print(dic)
+print(dic_dna)
 

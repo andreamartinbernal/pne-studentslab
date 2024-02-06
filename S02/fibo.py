@@ -1,5 +1,5 @@
 n_terms = 11
-x1 = 0
+x1 = 1
 x2 = 1
 while n_terms > 0:
     print(x1, end=",")
