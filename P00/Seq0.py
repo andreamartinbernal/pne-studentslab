@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 def seq_ping():
     print("OK")
 
@@ -14,9 +15,12 @@ def seq_read_fasta(filename):
         f.close()
     return complete_seq
 
-def len_seq(seq):
-    len_seq = len(seq)
-    return len_seq
+
+def seq_len(seq):
+    return len(seq)
+
+
+
 #without dicts
 def number_of_bases(seq):
     numberA = 0
