@@ -1,6 +1,5 @@
 from pathlib import Path
 from Seq0 import *
-DNA_BASES = ["A", "C", "T", "G"]
 FILENAMES = ["U5.txt", "ADA.txt", "FRAT1.txt", "FXN.txt"]
 FOLDER = "./sequences/"
 print("-----| Exercise 5 |------")
