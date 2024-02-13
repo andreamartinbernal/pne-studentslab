@@ -47,14 +47,3 @@ def seq_complement(seq):
     return complementary_seq
 
 
-def seq_complement(seq):
-    for i in seq:
-        if i == "A":
-            i="T"
-        if i == "T":
-            i="A"
-        if i == "C":
-            i="G"
-        if i == "G":
-            i="C"
-    return seq
