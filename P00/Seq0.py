@@ -20,29 +20,12 @@ def seq_len(seq):
     return len(seq)
 
 
-
-#without dicts
-def number_of_bases(seq):
-    numberA = 0
-    numberC = 0
-    numberG = 0
-    numberT = 0
-    #secToProcess = seq_X51501 . replace(">X51501.1 H.sapiens GPIPI gene, exon 1 (and joined CDS)" , "")
-    secToProcess = ""
-    for character in secToProcess:
-        if character == "A":
-            numberA += 1
-        elif character == "C":
-            numberC += 1
-        elif character == "G":
-            numberG += 1
-        elif character == "T":
-            numberT += 1
-    print("Number of times that letter 'A' appears in the sentence:",numberA)
-    print("Number of times that letter 'C' appears in the sentence:",numberC)
-    print("Number of times that letter 'G' appears in the sentence:",numberG)
-    print("Number of times that letter 'T' appears in the sentence:",numberT)
-
+def seq_count_base(seq, base):
+    number = 0
+    for each_base in seq:
+        if each_base == base:
+            number += 1
+    return number
 
 def get_bases_count(dna_sequence):
     bases_dna = {"A": 0, "C": 0, "G": 0, "T": 0}
