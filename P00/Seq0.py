@@ -1,4 +1,5 @@
 from pathlib import Path
+DNA_BASES = ["A", "C", "T", "G"]
 
 
 def seq_ping():
