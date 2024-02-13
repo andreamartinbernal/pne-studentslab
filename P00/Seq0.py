@@ -35,6 +35,10 @@ def seq_count(seq):
         bases_dna[base] = seq_count_base(seq, base)
     return bases_dna
 
+
+def seq_reverse(seq, n):
+    return seq[:n][::-1]
+
 def seq_complement(seq):
     for i in seq:
         if i == "A":
