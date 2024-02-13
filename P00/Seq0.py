@@ -28,10 +28,11 @@ def seq_count_base(seq, base):
             number += 1
     return number
 
-def get_bases_count(dna_sequence):
+
+def seq_count(seq):
     bases_dna = {"A": 0, "C": 0, "G": 0, "T": 0}
-    for base in bases_dna:
-        bases_dna[base] = dna_sequence.count(base)
+    for base in DNA_BASES:
+        bases_dna[base] = seq_count_base(seq, base)
     return bases_dna
 
 def seq_complement(seq):
