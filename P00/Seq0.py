@@ -45,5 +45,3 @@ def seq_complement(seq):
     for base in seq:
         complementary_seq += COMPLEMENTARY_BASES[base]
     return complementary_seq
-
-
