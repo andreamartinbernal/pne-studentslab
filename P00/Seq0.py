@@ -1,6 +1,6 @@
 from pathlib import Path
 DNA_BASES = ["A", "C", "T", "G"]
-
+COMPLEMENTARY_BASES = {"A": "T", "C": "G", "G": "C", "T": "A"}
 
 def seq_ping():
     print("OK")
@@ -38,6 +38,14 @@ def seq_count(seq):
 
 def seq_reverse(seq, n):
     return seq[:n][::-1]
+
+
+def seq_complement(seq):
+    complementary_seq = ""
+    for base in seq:
+        complementary_seq += COMPLEMENTARY_BASES[base]
+    return complementary_seq
+
 
 def seq_complement(seq):
     for i in seq:
