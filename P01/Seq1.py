@@ -35,7 +35,11 @@ class Seq:
 
 
     def __len__(self):
-        return len(self.strbases)
+        if self.strbases == "NULL" or self.strbases == "ERROR":
+            return 0
+        else:
+            return len(self.strbases)
+
 
     def __str__(self):
         return self.strbases
