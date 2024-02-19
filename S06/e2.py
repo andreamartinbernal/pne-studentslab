@@ -11,10 +11,11 @@ class Seq:
     def __len__(self):
         return len(self.strbases)
 
+
 def print_seqs(seq_list):
     n = 0
     for seq in seq_list:
-        print(f"Sequence {n} : (Length: {seq.len()}) {seq}")
+        print(f"Sequence {n} : (Length: {len(seq)}) {seq}")
         n += 1
 
 
