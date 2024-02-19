@@ -27,7 +27,6 @@ class Seq:
 def print_seqs(seq_list, color):
     n = 0
     for seq in seq_list:
-        print(f"Sequence {n} : (Length: {len(seq)}) {seq}")
         termcolor.cprint(f"Sequence {n} : (Length: {len(seq)}) {seq}", color)
         n += 1
 
