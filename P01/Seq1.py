@@ -30,8 +30,9 @@ class Seq:
                 self.strbases = strbases
                 print("New sequence created!")
             else:
-                self.strbases = "ERROR!!"
-                print("ERROR!!")
+                print("INVALID sequence created")
+                self.strbases = "ERROR"
+
 
     def __len__(self):
         return len(self.strbases)
