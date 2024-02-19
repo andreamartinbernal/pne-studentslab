@@ -8,7 +8,7 @@ class Seq:
     def __str__(self):
         return self.strbases
 
-    def len(self):
+    def __len__(self):
         return len(self.strbases)
 
 def print_seqs(seq_list):
