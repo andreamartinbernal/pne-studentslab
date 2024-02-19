@@ -17,17 +17,21 @@ def generate_seqs(pattern, number):
 
 
 class Seq:
-    def __init__(self, strbases):
-        count = 0
-        for base in DNA_BASES:
-            count += strbases.count(base)
-
-        if count == len(strbases):
-            self.strbases = strbases
-            print("New sequence created!")
+    def __init__(self, strbases=None):
+        if strbases is None:
+            print("NULL sequence created")
+            self.strbases = "NULL"
         else:
-            self.strbases = "ERROR!!"
-            print("ERROR!!")
+            count = 0
+            for base in DNA_BASES:
+                count += strbases.count(base)
+
+            if count == len(strbases):
+                self.strbases = strbases
+                print("New sequence created!")
+            else:
+                self.strbases = "ERROR!!"
+                print("ERROR!!")
 
     def __len__(self):
         return len(self.strbases)
