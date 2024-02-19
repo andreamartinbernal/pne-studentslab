@@ -10,7 +10,7 @@ class Seq:
     def __str__(self):
         """Method called when the object is being printed"""
         # -- We just return the string with the sequence
-        return self.strbases
+        return f"My sequence is {self.strbases}"
 
 
 # --- Main program
