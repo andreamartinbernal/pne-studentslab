@@ -1,0 +1,3 @@
+MACHINE             INTERFACE           DATE            PLACE                   ID
+mobile              wifi                27 feb          home
+lab computer        wire                27 feb          Fuenlabrada Lab         212.128.255.78
