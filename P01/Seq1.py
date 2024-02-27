@@ -1,5 +1,5 @@
 DNA_BASES = ["A", "T", "C", "G"]
-
+COMPLEMENTARY_BASES = {"A": "T", "C": "G", "G": "C", "T": "A"}
 
 class Seq:
     def __init__(self, strbases=None):
@@ -65,5 +65,22 @@ class Seq:
                 bases_dict[base] += 1
         return bases_dict
 
+    def seq_reverse(self, seq_len):
+        return seq[:seq_len][::-1]
 
+    def seq_complement(self, seq):
+        complementary_seq = ""
+        for base in seq:
+            complementary_seq += COMPLEMENTARY_BASES[base]
+        return complementary_seq
+
+    def seq_read_fasta(self, filename):
+        with open(filename, "r") as f:
+            file_contents = Path(filename).read_text()
+            list_contents = file_contents.split("\n")
+            complete_seq = ""
+            for i in range(1, len(list_contents)):
+                complete_seq += (list_contents[i])
+            f.close()
+        return complete_seq
 
