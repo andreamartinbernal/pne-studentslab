@@ -1,20 +1,5 @@
 DNA_BASES = ["A", "T", "C", "G"]
 
-def print_seqs(seq_list):
-    n = 0
-    for seq in seq_list:
-        print(f"Sequence {n} : (Length: {len(seq)}) {seq}")
-        n += 1
-
-
-def generate_seqs(pattern, number):
-    seq_list = []
-    seq = ""
-    for i in range(number):
-        seq += pattern
-        seq_list.append(Seq(seq))
-    return seq_list
-
 
 class Seq:
     def __init__(self, strbases=None):
@@ -32,6 +17,20 @@ class Seq:
             else:
                 print("INVALID sequence created")
                 self.strbases = "ERROR"
+
+    def print_seqs(seq_list):
+        n = 0
+        for seq in seq_list:
+            print(f"Sequence {n} : (Length: {len(seq)}) {seq}")
+            n += 1
+
+    def generate_seqs(pattern, number):
+        seq_list = []
+        seq = ""
+        for i in range(number):
+            seq += pattern
+            seq_list.append(Seq(seq))
+        return seq_list
 
 
     def __len__(self):
