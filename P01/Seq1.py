@@ -43,3 +43,28 @@ class Seq:
 
     def __str__(self):
         return self.strbases
+
+    def count_base(self, base):
+        number = 0
+        for each_base in self.strbases.split():
+            if each_base == base:
+                number += 1
+        return number
+
+    def seq_len(self):
+        if self.seq == None or self.seq == 'ERROR':
+            length = 0
+        else:
+            length = len(self.seq)
+        return length
+
+    def seq_count(self):
+        length = self.seq_len()
+        bases_dict = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
+        if length != 0:
+            for base in self.seq:
+                bases_dict[base] += 1
+        return bases_dict
+
+
+
