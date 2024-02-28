@@ -77,11 +77,14 @@ class Seq:
         else:
             return self.strbases[:seq_len][::-1]
 
-    def seq_complement(self, seq):
-        complementary_seq = ""
-        for base in seq:
-            complementary_seq += COMPLEMENTARY_BASES[base]
-        return complementary_seq
+    def seq_complement(self):
+        if self.strbases == "NULL" or self.strbases == "ERROR":
+            return self.strbases
+        else:
+            complementary_seq = ""
+            for base in self.strbases:
+                complementary_seq += COMPLEMENTARY_BASES[base]
+            return complementary_seq
 
     def seq_read_fasta(self, filename):
         with open(filename, "r") as f:
