@@ -72,7 +72,10 @@ class Seq:
             return bases_dict
 
     def seq_reverse(self, seq_len):
-        return self.strbases[:seq_len][::-1]
+        if self.strbases == "NULL" or self.strbases == "ERROR":
+            return self.strbases
+        else:
+            return self.strbases[:seq_len][::-1]
 
     def seq_complement(self, seq):
         complementary_seq = ""
