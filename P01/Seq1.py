@@ -20,11 +20,7 @@ class Seq:
                 print("INVALID sequence created")
                 self.strbases = "ERROR"
 
-    def print_seqs(seq_list):
-        n = 0
-        for seq in seq_list:
-            print(f"Sequence {n} : (Length: {len(seq)}) {seq}")
-            n += 1
+
 
     def generate_seqs(pattern, number):
         seq_list = []
