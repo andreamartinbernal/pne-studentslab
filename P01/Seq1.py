@@ -61,11 +61,11 @@ class Seq:
         return length
 
     def seq_count(self):
+        bases_dict = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
         if self.strbases == "NULL" or self.strbases == "ERROR":
-            return 0
+            return bases_dict
         else:
             length = self.seq_len()
-            bases_dict = {'A': 0, 'T': 0, 'C': 0, 'G': 0}
             if length != 0:
                 for base in self.strbases:
                     bases_dict[base] += 1
