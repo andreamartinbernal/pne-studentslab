@@ -1,3 +1,5 @@
+from pathlib import Path
+
 DNA_BASES = ["A", "T", "C", "G"]
 COMPLEMENTARY_BASES = {"A": "T", "C": "G", "G": "C", "T": "A"}
 
@@ -54,7 +56,7 @@ class Seq:
             return number
 
     def seq_len(self):
-        if self.strbases == None or self.strbases == 'ERROR':
+        if self.strbases == "NULL" or self.strbases == 'ERROR':
             length = 0
         else:
             length = len(self.strbases)
@@ -71,11 +73,11 @@ class Seq:
                     bases_dict[base] += 1
             return bases_dict
 
-    def seq_reverse(self, seq_len):
+    def seq_reverse(self):
         if self.strbases == "NULL" or self.strbases == "ERROR":
             return self.strbases
         else:
-            return self.strbases[:seq_len][::-1]
+            return self.strbases[::-1]
 
     def seq_complement(self):
         if self.strbases == "NULL" or self.strbases == "ERROR":
@@ -86,7 +88,7 @@ class Seq:
                 complementary_seq += COMPLEMENTARY_BASES[base]
             return complementary_seq
 
-    def seq_read_fasta(self, filename):
+    def read_fasta(self, filename):
         with open(filename, "r") as f:
             file_contents = Path(filename).read_text()
             list_contents = file_contents.split("\n")
@@ -94,34 +96,9 @@ class Seq:
             for i in range(1, len(list_contents)):
                 complete_seq += (list_contents[i])
             f.close()
-        return complete_seq
+            self.strbases = complete_seq
 
-    def reverse(self):
-        if self.strbases == None:
-            return "NULL"
-        else:
-            for i in self.strbases:
-                if i == "A" or i == "C" or i == "T" or i == "G":
-                    seq_n = self.strbases[:len(self.strbases)]
-                    return seq_n[::-1]
-                else:
-                    return "ERROR"
 
-    def complement(self):
-        complement = ""
-        if self.strbases == None:
-            return "NULL"
-        else:
-            for base in self.strbases:
-                if base == "A":
-                    complement += "T"
-                elif base == "G":
-                    complement += "C"
-                elif base == "C":
-                    complement += "G"
-                elif base == "T":
-                    complement += "A"
-                else:
-                    return "ERROR"
-        return complement
+
+
 
