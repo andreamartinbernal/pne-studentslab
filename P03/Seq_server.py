@@ -1,5 +1,39 @@
 import socket
+from pathlib import Path
+from Seq1 import *
+
 SEQ_LIST = ["ACGTGG", "AAGTGG", "AAATGG", "AAAAGG", "AAAAAG"]
+
+
+def get_info_from_seq(seq):
+    seq = Seq(seq)
+    nb_of_each_base = seq.seq_count()
+    seq_length = len(seq)
+    info_str = f"\nSequence: {seq}\nTotal length: {seq_length}\n"
+    for key, number in nb_of_each_base.items():
+        info_str += f"{key}: {number} ({round(number/seq_length*100, 1)}%)\n"
+    return info_str
+
+
+def get_comp_from_seq(seq):
+    seq = Seq(seq)
+    complement_seq = seq.seq_complement()
+    return complement_seq
+
+
+def get_rev_from_seq(seq):
+    seq = Seq(seq)
+    reverse_seq = seq.seq_reverse()
+    return reverse_seq
+
+
+def get_seq_from_file(seq_name):
+    seq = Seq()
+    FOLDER = "./../P00/sequences/"
+    FILENAME = f"{seq_name}.txt"
+    full_filename = Path(FOLDER) / FILENAME
+    seq.read_fasta(full_filename)
+    return str(seq)
 
 
 # -- Step 1: create the socket
@@ -51,22 +85,41 @@ while True:
         msg = msg_raw.decode()
         if msg == "PING":
             print("PING command!")
+            cs.send("OK".encode())
         elif "GET" in msg:
             print("GET")
             nb_of_requested_seqs = int(msg.split(" ")[1])
             msg_to_send = SEQ_LIST[nb_of_requested_seqs]
             print(msg_to_send)
             cs.send(msg_to_send.encode())
-
-
-        # -- Print the received message
-        #print(f"Message received: {msg}")
-
-        # -- Send a response message to the client
-        #response = "HELLO. I am the Happy Server :-)\n"
-
-        # -- The message has to be encoded into bytes
-        #cs.send(response.encode())
+        elif "INFO" in msg:
+            print("INFO")
+            nb_seq = msg.split(" ")[1]
+            info_from_seq = get_info_from_seq(nb_seq)
+            print(info_from_seq)
+            cs.send(info_from_seq.encode())
+        elif "COMP" in msg:
+            print("COMP")
+            seq = msg.split(" ")[1]
+            comp_from_seq = get_comp_from_seq(seq)
+            print(comp_from_seq)
+            cs.send(comp_from_seq.encode())
+        elif "REV" in msg:
+            print("REV")
+            seq = msg.split(" ")[1]
+            rev_from_seq = get_rev_from_seq(seq)
+            print(rev_from_seq)
+            cs.send(rev_from_seq.encode())
+        elif "GENE" in msg:
+            print("GENE")
+            seq_name = msg.split(" ")[1]
+            seq_from_file = get_seq_from_file(seq_name)
+            print(seq_from_file)
+            cs.send(seq_from_file.encode())
+        else:
+            error_msg = "Unexpected command"
+            print(error_msg)
+            cs.send(error_msg.encode())
 
         # -- Close the data socket
         cs.close()
