@@ -27,9 +27,9 @@ response = c.talk("COMP ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCG
 print(response)
 print("\n* Testing REV...")
 response = c.talk("REV ACCTCCTCTCCAGCAATGCCAACCCCAGTCCAGGCCCCCATCCGCCCAGGATCTCGATCA")
-print(response)
+print(response, "")
 print("\n* Testing GENE...")
 for name in ["U5", "ADA", "FRAT1", "FXN", "RNU6_1155P"]:
-    print(f"GENE {name}")
+    print(f"\nGENE {name}")
     response = c.talk(f"GENE {name}")
     print(response)
