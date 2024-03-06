@@ -127,8 +127,15 @@ while True:
 
         elif "ADD" in msg:
             print("ADD")
+            seq = msg.split(" ")[1]
             for sequence in SEQ_LIST:
-                print("\n", sequence)
+                if seq == sequence:
+                    print("The sequence is already on the list")
+                    print("\n", sequence)
+                else:
+                    SEQ_LIST.append(seq)
+                    print(SEQ_LIST)
+                    cs.send(SEQ_LIST)
 
         else:
             error_msg = "Unexpected command"
