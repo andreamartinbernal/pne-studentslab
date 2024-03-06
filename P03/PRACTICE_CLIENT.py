@@ -43,8 +43,8 @@ for seq in SEQ_LIST:
     print(seq)
 
 print("\n* Testing ADD...")
-response = c.talk("ADD ")
-seq1 = "AAAAGG"
+response = c.talk("ADD AAAAGG")
+seq1 = SEQ_LIST[1]
 print(f"Adding {seq1} to the list")
 for sequence in SEQ_LIST:
     if seq1 == sequence:
