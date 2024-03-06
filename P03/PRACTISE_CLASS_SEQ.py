@@ -1,5 +1,5 @@
 from pathlib import Path
-
+seq = ""
 DNA_BASES = ["A", "T", "C", "G"]
 COMPLEMENTARY_BASES = {"A": "T", "C": "G", "G": "C", "T": "A"}
 
@@ -91,7 +91,8 @@ class Seq:
             self.strbases = complete_seq
 
 
-    def
+
+
 
 
 
