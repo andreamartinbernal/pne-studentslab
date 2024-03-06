@@ -43,7 +43,7 @@ for seq in SEQ_LIST:
     print(seq)
 
 print("\n* Testing ADD...")
-response = c.talk("LIST")
+response = c.talk("ADD")
 seq1 = "AAAAGG"
 seq2 = "ACGTGGG"
 print(f"Adding {seq1} and {seq2} to the list")
