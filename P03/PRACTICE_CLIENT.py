@@ -43,20 +43,17 @@ for seq in SEQ_LIST:
     print(seq)
 
 print("\n* Testing ADD...")
-response = c.talk("ADD")
+response = c.talk("ADD ")
 seq1 = "AAAAGG"
-seq2 = "ACGTGGG"
-print(f"Adding {seq1} and {seq2} to the list")
+print(f"Adding {seq1} to the list")
 for sequence in SEQ_LIST:
-    if seq1 == sequence and (len(seq1) == len(sequence)):
+    if seq1 == sequence:
         response = c.talk(f"The sequence: {seq1} is already on the list")
         print(response)
-    if seq2 == sequence and (len(seq2) == len(sequence)):
-        response = c.talk(f"The sequence: {seq2} is already on the list")
-        print(response)
+
     else:
-        SEQ_LIST = SEQ_LIST.append(seq1)
-        SEQ_LIST = SEQ_LIST.append(seq2)
+        SEQ_LIST.append(sequence)
         response = c.talk(f"The resultant sequence list is: {SEQ_LIST}")
+        print(response)
 
 response = c.talk("")

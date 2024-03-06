@@ -116,6 +116,9 @@ while True:
             seq_from_file = get_seq_from_file(seq_name)
             print(seq_from_file)
             cs.send(seq_from_file.encode())
+
+
+
         elif "LIST" in msg:
             print("LIST")
             nb_seq = 0
