@@ -34,7 +34,7 @@ for name in ["U5", "ADA", "FRAT1", "FXN", "RNU6_1155P"]:
     response = c.talk(f"GENE {name}")
     print(response)
 
-
+################################################################
 
 
 print("\n* Testing LIST...")
@@ -51,8 +51,8 @@ for sequence in SEQ_LIST:
     if seq1 == sequence and (len(seq1) == len(sequence)):
         response = c.talk(f"The sequence: {seq1} is already on the list")
         print(response)
-    if seq1 == sequence and (len(seq1) == len(sequence)):
-        response = c.talk(f"The sequence: {seq1} is already on the list")
+    if seq2 == sequence and (len(seq2) == len(sequence)):
+        response = c.talk(f"The sequence: {seq2} is already on the list")
         print(response)
     else:
         SEQ_LIST = SEQ_LIST.append(seq1)
