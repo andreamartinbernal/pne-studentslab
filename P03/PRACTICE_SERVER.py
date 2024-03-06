@@ -116,15 +116,18 @@ while True:
             seq_from_file = get_seq_from_file(seq_name)
             print(seq_from_file)
             cs.send(seq_from_file.encode())
+
+
+
         elif "LIST" in msg:
             print("LIST")
+            nb_seq = 0
             for seq in SEQ_LIST:
-                cs.send(seq.encode())
-                print("\n", seq)
+                nb_seq += 1
+
         elif "ADD" in msg:
             print("ADD")
             for sequence in SEQ_LIST:
-                cs.send(sequence.encode())
                 print("\n", sequence)
 
         else:
