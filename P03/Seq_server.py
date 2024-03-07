@@ -1,4 +1,5 @@
 import socket
+import termcolor
 from pathlib import Path
 from Seq1 import *
 
@@ -84,34 +85,34 @@ while True:
         # -- into a human-redeable string
         msg = msg_raw.decode()
         if msg == "PING":
-            print("PING command!")
+            termcolor.cprint("PING command!", 'green')
             cs.send("OK".encode())
         elif "GET" in msg:
-            print("GET")
+            termcolor.cprint("GET", 'green')
             nb_of_requested_seqs = int(msg.split(" ")[1])
             msg_to_send = SEQ_LIST[nb_of_requested_seqs]
             print(msg_to_send)
             cs.send(msg_to_send.encode())
         elif "INFO" in msg:
-            print("INFO")
+            termcolor.cprint("INFO", 'green')
             nb_seq = msg.split(" ")[1]
             info_from_seq = get_info_from_seq(nb_seq)
             print(info_from_seq)
             cs.send(info_from_seq.encode())
         elif "COMP" in msg:
-            print("COMP")
+            termcolor.cprint("COMP", 'green')
             seq = msg.split(" ")[1]
             comp_from_seq = get_comp_from_seq(seq)
             print(comp_from_seq)
             cs.send(comp_from_seq.encode())
         elif "REV" in msg:
-            print("REV")
+            termcolor.cprint("REV", 'green')
             seq = msg.split(" ")[1]
             rev_from_seq = get_rev_from_seq(seq)
             print(rev_from_seq)
             cs.send(rev_from_seq.encode())
         elif "GENE" in msg:
-            print("GENE")
+            termcolor.cprint("GENE", 'green')
             seq_name = msg.split(" ")[1]
             seq_from_file = get_seq_from_file(seq_name)
             print(seq_from_file)
