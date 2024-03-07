@@ -37,8 +37,8 @@ def get_seq_from_file(seq_name):
 def add_sequence(seq):
     if seq not in SEQ_LIST:
         SEQ_LIST.append(seq)
-    else:
-        pass
+        return 1
+    return 0
 
 
 # -- Step 1: create the socket
@@ -135,6 +135,7 @@ while True:
             print("ADD")
             seq = msg.split(" ")[1]
             new_seq = add_sequence(seq)
+
             print(new_seq)
             cs.send(new_seq.encode())
 
