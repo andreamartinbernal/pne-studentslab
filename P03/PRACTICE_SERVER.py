@@ -35,11 +35,10 @@ def get_seq_from_file(seq_name):
     seq.read_fasta(full_filename)
     return str(seq)
 def add_sequence(seq):
-    for sequence in SEQ_LIST:
-        if seq != sequence:
-            SEQ_LIST.append(seq)
-        else:
-            pass
+    if seq not in SEQ_LIST:
+        SEQ_LIST.append(seq)
+    else:
+        pass
 
 
 # -- Step 1: create the socket
