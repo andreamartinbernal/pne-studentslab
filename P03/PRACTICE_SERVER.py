@@ -134,11 +134,14 @@ while True:
         elif "ADD" in msg:
             print("ADD")
             seq = msg.split(" ")[1]
-            new_seq = add_sequence(seq)
-
-            print(new_seq)
-            cs.send(new_seq.encode())
-
+            return_code = add_sequence(seq)
+            if return_code == 1:
+                print("Succesfully added")
+                msg_to_send = "Succesfully added"
+            else:
+                print("Something went wrong")
+                msg_to_send = "Something went wrong"
+            cs.send(msg_to_send.encode())
         else:
             error_msg = "Unexpected command"
             print(error_msg)

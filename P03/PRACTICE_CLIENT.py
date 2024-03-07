@@ -42,14 +42,6 @@ for seq in SEQ_LIST:
 print("\n* Testing ADD...")
 response = c.talk("ADD AAAAGG")
 print(f"Adding {seq} to the list")
-for sequence in SEQ_LIST:
-    if seq == sequence:
-        response = c.talk(f"The sequence: {seq} is already on the list")
-        print(response)
 
-    else:
-        SEQ_LIST.append(sequence)
-        response = c.talk(f"The resultant sequence list is: {SEQ_LIST}")
-        print(response)
 
 response = c.talk("")
