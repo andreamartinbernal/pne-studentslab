@@ -35,11 +35,10 @@ def get_seq_from_file(seq_name):
     seq.read_fasta(full_filename)
     return str(seq)
 def add_sequence(seq):
-    for sequence in SEQ_LIST:
-        if seq != sequence:
-            SEQ_LIST.append(seq)
-        else:
-            pass
+    if seq not in SEQ_LIST:
+        SEQ_LIST.append(seq)
+        return 1
+    return 0
 
 
 # -- Step 1: create the socket
@@ -135,10 +134,14 @@ while True:
         elif "ADD" in msg:
             print("ADD")
             seq = msg.split(" ")[1]
-            new_seq = add_sequence(seq)
-            print(new_seq)
-            cs.send(new_seq.encode())
-
+            return_code = add_sequence(seq)
+            if return_code == 1:
+                print("Succesfully added")
+                msg_to_send = "Succesfully added"
+            else:
+                print("Something went wrong")
+                msg_to_send = "Something went wrong"
+            cs.send(msg_to_send.encode())
         else:
             error_msg = "Unexpected command"
             print(error_msg)
