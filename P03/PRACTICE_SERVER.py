@@ -5,8 +5,8 @@ from Seq1 import *
 SEQ_LIST = ["ACGTGG", "AAGTGG", "AAATGG", "AAAAGG", "AAAAAG"]
 
 
-def type_seq(seq):
-    if not len((seq.remove("A") and seq.remove("C") and seq.remove("G") and seq.remove("T") == 0):
+def valid_seq(seq):
+    if not len((seq.remove("A").remove("C").remove("G").remove("T") == 0):
         return 0
     else:
         return 1
