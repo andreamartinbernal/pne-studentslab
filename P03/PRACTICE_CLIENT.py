@@ -34,14 +34,16 @@ for name in ["U5", "ADA", "FRAT1", "FXN", "RNU6_1155P"]:
     print(f"\nGENE {name}")
     response = c.talk(f"GENE {name}")
     print(response)
+
+
+############################################
 print("\n* Testing LIST...")
 response = c.talk("LIST")
 for seq in SEQ_LIST:
     print(seq)
 
 print("\n* Testing ADD...")
-response = c.talk("ADD AAAAGG")
 print(f"Adding {seq} to the list")
-
-
+response = c.talk("ADD AAAAGG")
+print(response)
 response = c.talk("")
