@@ -5,6 +5,16 @@ from Seq1 import *
 SEQ_LIST = ["ACGTGG", "AAGTGG", "AAATGG", "AAAAGG", "AAAAAG"]
 
 
+def type_seq(seq):
+    if not len((seq.remove("A") and seq.remove("C") and seq.remove("G") and seq.remove("T") == 0):
+        return 0
+    else:
+        return 1
+
+
+
+
+
 def get_info_from_seq(seq):
     seq = Seq(seq)
     nb_of_each_base = seq.seq_count()
@@ -122,7 +132,7 @@ while True:
             print(seq_from_file)
             cs.send(seq_from_file.encode())
 
-
+#################################################33
 
         elif "LIST" in msg:
             print("LIST")
