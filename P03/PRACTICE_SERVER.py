@@ -6,7 +6,7 @@ SEQ_LIST = ["ACGTGG", "AAGTGG", "AAATGG", "AAAAGG", "AAAAAG"]
 
 
 def type_seq(seq):
-    if not len((seq.remove("A") and seq.remove("C") and seq.remove("G") and seq.remove("T") == 0):
+    if not len((seq.remove("A").remove("C").remove("G").remove("T")) == 0:
         return 0
     else:
         return 1
@@ -148,6 +148,7 @@ while True:
                 if seq == 0:
                     msg_to_send = "Not valid sequence"
                     cs.send(msg_to_send.encode())
+                    ls.close()
                 else:
                     nb_seq += 1
                     cs.send(seq.encode())
