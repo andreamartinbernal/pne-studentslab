@@ -6,10 +6,10 @@ SEQ_LIST = ["ACGTGG", "AAGTGG", "AAATGG", "AAAAGG", "AAAAAG"]
 
 
 def type_seq(seq):
-    if not len((seq.remove("A").remove("C").remove("G").remove("T")) == 0:
-        return 0
-    else:
+    if not len((seq.remove("A").remove("C").remove("G").remove("T")) == 0):
         return 1
+    else:
+        return 0
 
 def get_info_from_seq(seq):
     seq = Seq(seq)
@@ -113,9 +113,10 @@ while True:
             print("COMP")
             seq = msg.split(" ")[1]
             seq = type_seq(seq)
-            if seq == 0:
+            if seq == 1:
                 msg_to_send = "Not valid sequence"
                 cs.send(msg_to_send.encode())
+                ls.close()
             else:
                 comp_from_seq = get_comp_from_seq(seq)
                 print(comp_from_seq)
@@ -124,9 +125,10 @@ while True:
             print("REV")
             seq = msg.split(" ")[1]
             seq = type_seq(seq)
-            if seq == 0:
+            if seq == 1:
                 msg_to_send = "Not valid sequence"
                 cs.send(msg_to_send.encode())
+                ls.close()
             else:
                 rev_from_seq = get_rev_from_seq(seq)
                 print(rev_from_seq)
@@ -145,7 +147,7 @@ while True:
             nb_seq = 0
             for seq in SEQ_LIST:
                 seq = type_seq(seq)
-                if seq == 0:
+                if seq == 1:
                     msg_to_send = "Not valid sequence"
                     cs.send(msg_to_send.encode())
                     ls.close()
@@ -160,6 +162,7 @@ while True:
             if seq == 0:
                 msg_to_send = "Not valid sequence"
                 cs.send(msg_to_send.encode())
+                ls.close()
             else:
                 return_code = add_sequence(seq)
                 if return_code == 1:
