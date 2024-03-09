@@ -5,15 +5,11 @@ from Seq1 import *
 SEQ_LIST = ["ACGTGG", "AAGTGG", "AAATGG", "AAAAGG", "AAAAAG"]
 
 
-def valid_seq(seq):
-    if not len((seq.remove("A").remove("C").remove("G").remove("T") == 0):
-        return 0
-    else:
+def type_seq(seq):
+    if not len((seq.remove("A").remove("C").remove("G").remove("T")) == 0):
         return 1
-
-
-
-
+    else:
+        return 0
 
 def get_info_from_seq(seq):
     seq = Seq(seq)
@@ -116,15 +112,27 @@ while True:
         elif "COMP" in msg:
             print("COMP")
             seq = msg.split(" ")[1]
-            comp_from_seq = get_comp_from_seq(seq)
-            print(comp_from_seq)
-            cs.send(comp_from_seq.encode())
+            seq = type_seq(seq)
+            if seq == 1:
+                msg_to_send = "Not valid sequence"
+                cs.send(msg_to_send.encode())
+                ls.close()
+            else:
+                comp_from_seq = get_comp_from_seq(seq)
+                print(comp_from_seq)
+                cs.send(comp_from_seq.encode())
         elif "REV" in msg:
             print("REV")
             seq = msg.split(" ")[1]
-            rev_from_seq = get_rev_from_seq(seq)
-            print(rev_from_seq)
-            cs.send(rev_from_seq.encode())
+            seq = type_seq(seq)
+            if seq == 1:
+                msg_to_send = "Not valid sequence"
+                cs.send(msg_to_send.encode())
+                ls.close()
+            else:
+                rev_from_seq = get_rev_from_seq(seq)
+                print(rev_from_seq)
+                cs.send(rev_from_seq.encode())
         elif "GENE" in msg:
             print("GENE")
             seq_name = msg.split(" ")[1]
@@ -138,20 +146,32 @@ while True:
             print("LIST")
             nb_seq = 0
             for seq in SEQ_LIST:
-                nb_seq += 1
-                cs.send(seq.encode())
+                seq = type_seq(seq)
+                if seq == 1:
+                    msg_to_send = "Not valid sequence"
+                    cs.send(msg_to_send.encode())
+                    ls.close()
+                else:
+                    nb_seq += 1
+                    cs.send(seq.encode())
 
         elif "ADD" in msg:
             print("ADD")
             seq = msg.split(" ")[1]
-            return_code = add_sequence(seq)
-            if return_code == 1:
-                print("Succesfully added")
-                msg_to_send = "Succesfully added"
+            seq = type_seq(seq)
+            if seq == 0:
+                msg_to_send = "Not valid sequence"
+                cs.send(msg_to_send.encode())
+                ls.close()
             else:
-                print("Something went wrong")
-                msg_to_send = "Something went wrong"
-            cs.send(msg_to_send.encode())
+                return_code = add_sequence(seq)
+                if return_code == 1:
+                    print("Succesfully added")
+                    msg_to_send = "Succesfully added"
+                else:
+                    print("Something went wrong")
+                    msg_to_send = "Something went wrong"
+                cs.send(msg_to_send.encode())
         else:
             error_msg = "Unexpected command"
             print(error_msg)
