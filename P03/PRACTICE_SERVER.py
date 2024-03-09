@@ -1,8 +1,9 @@
 import socket
 from pathlib import Path
-from Seq1 import *
+from Seq2 import *
 
 SEQ_LIST = ["ACGTGG", "AAGTGG", "AAATGG", "AAAAGG", "AAAAAG"]
+CONCATENATED_SEQUENCE = ""
 
 
 def type_seq(seq):
@@ -10,6 +11,7 @@ def type_seq(seq):
         return 1
     else:
         return 0
+
 
 def get_info_from_seq(seq):
     seq = Seq(seq)
@@ -45,6 +47,14 @@ def add_sequence(seq):
         SEQ_LIST.append(seq)
         return 1
     return 0
+
+def concat_DNA_string(seq1, seq2):
+    if seq1.is_ok() is True and seq2.is_ok() is True:
+        return 1
+    else:
+        return 0
+
+
 
 
 # -- Step 1: create the socket
@@ -172,6 +182,26 @@ while True:
                     print("Something went wrong")
                     msg_to_send = "Something went wrong"
                 cs.send(msg_to_send.encode())
+        elif "CONCATENATE" in msg:
+            print("CONCATENATE")
+            seq1 = msg.split(" ")[1]
+            seq2 = msg.split(" ")[3]
+            seq1 = type_seq(seq)
+            seq2 = type_seq(seq)
+            if seq1 == 0 or seq2 == 0:
+                msg_to_send = "Not valid sequence"
+                cs.send(msg_to_send.encode())
+                ls.close()
+            else:
+                return_code = concat_DNA_string(seq1, seq2)
+                if return_code == 1:
+                    print("Succesfully added")
+                    msg_to_send = "Succesfully added"
+                else:
+                    print("Something went wrong")
+                    msg_to_send = "Something went wrong"
+                cs.send(msg_to_send.encode())
+
         else:
             error_msg = "Unexpected command"
             print(error_msg)
