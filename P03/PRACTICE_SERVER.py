@@ -214,7 +214,7 @@ while True:
             seq2 = msg.split(" ")[3]
             seq1_concatenated = type_seq(seq)
             seq2_concatenated = type_seq(seq)
-            if  == 0 or seq2_ok == 0:
+            if seq1_ok == 0 or seq2_ok == 0:
                 msg_to_send = "Not valid sequence"
                 cs.send(msg_to_send.encode())
                 ls.close()
