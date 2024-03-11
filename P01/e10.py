@@ -16,4 +16,4 @@ for filename in FILENAMES:
             max_nb_occurrences = bases_count_dict[base]
             most_frequent_base = base
 
-    print(f"Gene {filename.replace(".txt", "")}: Most frequent Base: {most_frequent_base}")
+    print(f"Gene {filename.replace('.txt', '')}: Most frequent Base: {most_frequent_base}")
