@@ -34,22 +34,28 @@ for name in ["U5", "ADA", "FRAT1", "FXN", "RNU6_1155P"]:
     print(f"\nGENE {name}")
     response = c.talk(f"GENE {name}")
     print(response)
+
+
+############################################
 print("\n* Testing LIST...")
 response = c.talk("LIST")
 for seq in SEQ_LIST:
     print(seq)
 
 print("\n* Testing ADD...")
-response = c.talk("ADD AAAAGG")
 print(f"Adding {seq} to the list")
-for sequence in SEQ_LIST:
-    if seq == sequence:
-        response = c.talk(f"The sequence: {seq} is already on the list")
-        print(response)
+response = c.talk("ADD AAAAGG")
+print(response)
+response = c.talk("")
 
-    else:
-        SEQ_LIST.append(sequence)
-        response = c.talk(f"The resultant sequence list is: {SEQ_LIST}")
-        print(response)
+print("\n* Testing CONCATENATE str...")
+print(f"Adding {seq1} to {seq2}")
+response = c.talk("CONCATENATE AAAAGG and ACGTTC")
+print(response)
+response = c.talk("")
 
+print("\n* Testing CONCATENATE Seq...")
+print(f"Adding {seq1} to {seq2}")
+response = c.talk("CONCATENATE AAAAGG and ACGTTC")
+print(response)
 response = c.talk("")

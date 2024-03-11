@@ -1,8 +1,16 @@
 import socket
 from pathlib import Path
-from Seq1 import *
+from Seq2 import *
 
 SEQ_LIST = ["ACGTGG", "AAGTGG", "AAATGG", "AAAAGG", "AAAAAG"]
+CONCATENATED_SEQUENCE = ""
+
+
+def type_seq(seq):
+    if not len((seq.remove("A").remove("C").remove("G").remove("T")) == 0):
+        return 1
+    else:
+        return 0
 
 
 def get_info_from_seq(seq):
@@ -34,6 +42,26 @@ def get_seq_from_file(seq_name):
     full_filename = Path(FOLDER) / FILENAME
     seq.read_fasta(full_filename)
     return str(seq)
+def add_sequence(seq):
+    if seq not in SEQ_LIST:
+        SEQ_LIST.append(seq)
+        return 1
+    return 0
+
+def concat_DNA_string(seq1, seq2):
+    concatenated_str = seq1 + seq2
+    return concatenated_str
+
+
+def concat_DNA_Seq(seq):
+    seq1 = Seq()
+    seq2 = Seq()
+    seq1.is_ok()
+    seq2.is_ok()
+    if seq1.is_ok() is True and seq2.is_ok() is True:
+        return 1
+    else:
+        return 0
 
 
 # -- Step 1: create the socket
@@ -101,15 +129,27 @@ while True:
         elif "COMP" in msg:
             print("COMP")
             seq = msg.split(" ")[1]
-            comp_from_seq = get_comp_from_seq(seq)
-            print(comp_from_seq)
-            cs.send(comp_from_seq.encode())
+            seq = type_seq(seq)
+            if seq == 1:
+                msg_to_send = "Not valid sequence"
+                cs.send(msg_to_send.encode())
+                ls.close()
+            else:
+                comp_from_seq = get_comp_from_seq(seq)
+                print(comp_from_seq)
+                cs.send(comp_from_seq.encode())
         elif "REV" in msg:
             print("REV")
             seq = msg.split(" ")[1]
-            rev_from_seq = get_rev_from_seq(seq)
-            print(rev_from_seq)
-            cs.send(rev_from_seq.encode())
+            seq = type_seq(seq)
+            if seq == 1:
+                msg_to_send = "Not valid sequence"
+                cs.send(msg_to_send.encode())
+                ls.close()
+            else:
+                rev_from_seq = get_rev_from_seq(seq)
+                print(rev_from_seq)
+                cs.send(rev_from_seq.encode())
         elif "GENE" in msg:
             print("GENE")
             seq_name = msg.split(" ")[1]
@@ -117,25 +157,76 @@ while True:
             print(seq_from_file)
             cs.send(seq_from_file.encode())
 
-
+#################################################33
 
         elif "LIST" in msg:
             print("LIST")
             nb_seq = 0
             for seq in SEQ_LIST:
-                nb_seq += 1
+                seq = type_seq(seq)
+                if seq == 1:
+                    msg_to_send = "Not valid sequence"
+                    cs.send(msg_to_send.encode())
+                    ls.close()
+                else:
+                    nb_seq += 1
+                    cs.send(seq.encode())
 
         elif "ADD" in msg:
             print("ADD")
             seq = msg.split(" ")[1]
-            for sequence in SEQ_LIST:
-                if seq == sequence:
-                    print("The sequence is already on the list")
-                    print("\n", sequence)
+            seq = type_seq(seq)
+            if seq == 0:
+                msg_to_send = "Not valid sequence"
+                cs.send(msg_to_send.encode())
+                ls.close()
+            else:
+                return_code = add_sequence(seq)
+                if return_code == 1:
+                    print("Succesfully added")
+                    msg_to_send = "Succesfully added"
                 else:
-                    SEQ_LIST.append(seq)
-                    print(SEQ_LIST)
-                    cs.send(SEQ_LIST)
+                    print("Something went wrong")
+                    msg_to_send = "Something went wrong"
+                cs.send(msg_to_send.encode())
+        elif "str" in msg:
+            print("CONCATENATE")
+            seq1 = msg.split(" ")[1]
+            seq2 = msg.split(" ")[3]
+            seq1_ok = type_seq(seq)
+            seq2_ok = type_seq(seq)
+            if seq1_ok == 0 or seq2_ok == 0:
+                msg_to_send = "Not valid sequence"
+                cs.send(msg_to_send.encode())
+                ls.close()
+            else:
+                return_code = concat_DNA_string(seq1, seq2)
+                if return_code == 1:
+                    print("Succesfully added")
+                    msg_to_send = "Succesfully added"
+                else:
+                    print("Something went wrong")
+                    msg_to_send = "Something went wrong"
+                cs.send(msg_to_send.encode())
+        elif "Seq" in msg:
+            print("CONCATENATE")
+            seq1 = msg.split(" ")[1]
+            seq2 = msg.split(" ")[3]
+            seq1_concatenated = type_seq(seq)
+            seq2_concatenated = type_seq(seq)
+            if seq1_ok == 0 or seq2_ok == 0:
+                msg_to_send = "Not valid sequence"
+                cs.send(msg_to_send.encode())
+                ls.close()
+            else:
+                return_code = concat_DNA_string(seq1, seq2)
+                if return_code == 1:
+                    print("Succesfully added")
+                    msg_to_send = "Succesfully added"
+                else:
+                    print("Something went wrong")
+                    msg_to_send = "Something went wrong"
+                cs.send(msg_to_send.encode())
 
         else:
             error_msg = "Unexpected command"

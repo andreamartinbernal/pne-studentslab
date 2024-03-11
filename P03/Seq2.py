@@ -1,8 +1,8 @@
 from pathlib import Path
-seq = ""
+
 DNA_BASES = ["A", "T", "C", "G"]
 COMPLEMENTARY_BASES = {"A": "T", "C": "G", "G": "C", "T": "A"}
-
+FILENAMES = ["U5", "ADA", "FRAT1", "FXN", "RNU6_1155P"]
 class Seq:
     def __init__(self, strbases=None):
         if strbases is None:
@@ -20,7 +20,11 @@ class Seq:
                 print("INVALID sequence created")
                 self.strbases = "ERROR"
 
-
+    def is_ok(self):
+        if self.strbases == "ERROR" or self.strbases == "NULL":
+            return False
+        else:
+            return True
 
     def generate_seqs(pattern, number):
         seq_list = []
@@ -29,7 +33,6 @@ class Seq:
             seq += pattern
             seq_list.append(Seq(seq))
         return seq_list
-
 
     def __len__(self):
         if self.strbases == "NULL" or self.strbases == "ERROR":
@@ -82,17 +85,24 @@ class Seq:
 
     def read_fasta(self, filename):
         with open(filename, "r") as f:
-            file_contents = Path(filename).read_text()
-            list_contents = file_contents.split("\n")
-            complete_seq = ""
-            for i in range(1, len(list_contents)):
-                complete_seq += (list_contents[i])
-            f.close()
-            self.strbases = complete_seq
-
-
-
-
+            if filename in FILENAMES:
+                file_contents = Path(filename).read_text()
+                list_contents = file_contents.split("\n")
+                complete_seq = ""
+                wrong_seq = ""
+                for i in range(1, len(list_contents)):
+                    if i == "A" or i =="C" or i == "G" or i == "T":
+                        complete_seq += (list_contents[i])
+                    wrong_seq += (list_contents[i])
+                    f.close()
+                    if len(wrong_seq) == len(complete_seq):
+                        self.strbases = "ERROR"
+                    else:
+                        self.strbases = complete_seq
+                return self.strbases
+            else:
+                self.strbases = "ERROR"
+                return self.strbases
 
 
 
