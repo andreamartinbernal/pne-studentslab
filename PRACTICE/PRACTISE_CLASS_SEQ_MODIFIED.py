@@ -105,7 +105,7 @@ class Seq:
     #NUEVOS MÉTODOS Y MÉTODOS MODIFICADOS
     # Returns False if sequence in the strbases member  is either "ERROR" or it is empty yet, returns 
     # True otherwise.
-    # En el tuyo faltaba considerar el caso de que estuviera vacía: self.strbase == None
+    # faltaba considerar el caso de que estuviera vacía: self.strbase == None
     def is_ok(self):
         if self.strbases == "ERROR" or self.strbases == "NULL":
             return False
