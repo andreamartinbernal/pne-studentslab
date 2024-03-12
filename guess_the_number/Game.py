@@ -51,9 +51,9 @@ while True:
         try:
             guess_number_return_code = chosen_number.guess_number(chosen_number)
             if guess_number_return_code == 0:
-                msg_to_send = (f"You won after {total_attempts} attempts!")
+                msg_to_send = f"You won after {total_attempts} attempts!"
             elif guess_number_return_code == 2:
-                msg_to_send = ("LOWER, but well tried")
+                msg_to_send = "LOWER, but well tried"
             else:
                 msg_to_send = "HIGHER, but well tried"
 
