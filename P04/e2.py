@@ -60,7 +60,7 @@ ls.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 ls.bind((IP, PORT))
 ls.listen()
 
-print("Green server configured!")
+print("Server configured!")
 
 # --- MAIN LOOP
 while True:
