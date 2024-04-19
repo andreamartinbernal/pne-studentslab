@@ -9,20 +9,21 @@ PORT = 8080
 socketserver.TCPServer.allow_reuse_address = True
 
 class TestHandler(http.server.BaseHTTPRequestHandler):
-
     def do_GET(self):
         termcolor.cprint(self.requestline, 'green')
 
         resource = self.path
+        print("resource vale", resource)
+
         if resource == "/" or resource == "/index.html":
             contents = Path("html/index.html").read_text()
-        elif resource == "/info/A.html":
+        elif resource == "/info/A":
             contents = Path("html/info/A.html").read_text()
-        elif resource == "/info/C.html":
+        elif resource == "/info/C":
             contents = Path("html/info/C.html").read_text()
-        elif resource == "/info/G.html":
+        elif resource == "/info/G":
             contents = Path("html/info/G.html").read_text()
-        elif resource == "/info/T.html":
+        elif resource == "/info/T":
             contents = Path("html/info/T.html").read_text()
         else:
             resource = self.path[1:]
@@ -40,6 +41,8 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(contents.encode())
         return
+
+#Main program starts here
 
 Handler = TestHandler
 
