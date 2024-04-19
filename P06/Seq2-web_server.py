@@ -74,17 +74,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 seq_n = msg[:len(msg)]
                 reverse = seq_n[::-1]
                 contents = read_html_file("operation.html").render(context={"result": reverse, "operation": "rev", "sequence": msg})
-
-
-
-
-
-
-
-
-
-
-
         else:
             contents = Path("html/error.html").read_text()
             self.send_response(404)

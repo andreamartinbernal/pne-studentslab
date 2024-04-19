@@ -1,6 +1,6 @@
 import socket
 from pathlib import Path
-import termcolor
+#import termcolor
 
 
 # -- Server network parameters
@@ -18,26 +18,21 @@ def process_client(s):
     # -- The request line is the first
     req_line = lines[0]
     print("Request line: ", end="")
-    termcolor.cprint(req_line, "green")
-    read_fileA= Path("html/info/A.html").read_text()
-    read_fileC = Path("html/info/C.html").read_text()
-    read_fileG = Path("html/info/G.html").read_text()
-    read_fileT = Path("html/info/T.html").read_text()
-    read_file_error = Path("html/error.html").read_text()
-    read_file_index = Path("html/index.html").read_text()
+    #termcolor.cprint(req_line, "green")
+    print(req_line)
 
     if "info/A" in req_line:
-        body = read_fileA
+        body = Path("html/info/A.html").read_text()
     elif "info/C" in req_line:
-        body = read_fileC
+        body = Path("html/info/C.html").read_text()
     elif "info/G" in req_line:
-        body = read_fileG
+        body = Path("html/info/G.html").read_text()
     elif "info/T" in req_line:
-        body = read_fileT
+        body = Path("html/info/T.html").read_text()
     elif "" in req_line:
-        body = read_file_index
+        body = Path("html/index.html").read_text()
     else:
-        body = read_file_error
+        body = Path("html/error.html").read_text()
     # -- Status line: We respond that everything is ok (200 code)
     status_line = "HTTP/1.1 200 OK\n"
 
