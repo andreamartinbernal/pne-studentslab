@@ -1,6 +1,6 @@
 import socket
 from pathlib import Path
-#import termcolor
+import termcolor
 
 
 # -- Server network parameters
@@ -18,7 +18,7 @@ def process_client(s):
     # -- The request line is the first
     req_line = lines[0]
     print("Request line: ", end="")
-    #termcolor.cprint(req_line, "green")
+    termcolor.cprint(req_line, "green")
     print(req_line)
 
     if "info/A" in req_line:
