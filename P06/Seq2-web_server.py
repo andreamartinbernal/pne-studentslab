@@ -31,6 +31,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             contents = Path("html/ping.html").read_text()
         elif self.path[:4] == "/get":
             print("ESTE ES EL SELFF PATH", self.path)
+            print("ESTE ES EL INDICE", arguments['n'])
+            print("ESTE ES EL NUMERO", arguments['n'][0])
+            print("ESTE ES EL ELEMENTO", GENES[int(arguments['n'][0])])
             for gene in GENES:
                 index = GENES.index(gene)
                 if 0 <= index <= 4:
