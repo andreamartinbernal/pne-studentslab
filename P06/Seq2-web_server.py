@@ -21,14 +21,16 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         url_path = urlparse(self.path)
         path = url_path.path
         arguments = parse_qs(url_path.query)
-
-        GENES = ["U5", "ADA", "FRAT1", "RNU6_269P", "FXN"]
+        print("ESTE ES EL URL PATH", url_path)
+        print("ESTOS SON LOS ARGUMENTOS", arguments)
+        GENES = ["U5", "ADA", "FRAT1", "RNU6", "FXN"]
         termcolor.cprint(self.requestline, 'green')
         if self.path == "/":
             contents = Path('html/index.html').read_text()
         elif self.path[:-1] == "/ping":
             contents = Path("html/ping.html").read_text()
         elif self.path[:4] == "/get":
+            print("ESTE ES EL SELFF PATH", self.path)
             for gene in GENES:
                 index = GENES.index(gene)
                 if 0 <= index <= 4:
