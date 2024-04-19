@@ -13,7 +13,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         termcolor.cprint(self.requestline, 'green')
 
         resource = self.path
-        print("resource vale", resource)
+        #print("resource vale", resource)
 
         if resource == "/" or resource == "/index.html":
             contents = Path("html/index.html").read_text()
