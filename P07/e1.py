@@ -25,7 +25,7 @@ r1 = conn.getresponse()
 print(f"Response received!: {r1.status} {r1.reason}\n")
 
 # -- Read the response's body
-response = json.loads(r1.read().decode("utf-8"))   #response= {'ping': 1}
+response = json.loads(r1.read().decode("utf-8"))
 
 if response["ping"] == 1:
     print("PING OK! The database is running!")
