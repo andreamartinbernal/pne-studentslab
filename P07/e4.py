@@ -14,16 +14,16 @@ genes = {"FRAT1": "ENSG00000165879",
          "KDR": "ENSG00000128052",
          "ANK2": "ENSG00000145362"}
 
-gene_l = list(genes.keys())
+gene_list = list(genes.keys())
 
 
 correct = False
 while not correct:
     gene_name = input("Please enter a gene name:").upper().strip()
-    if gene_name in gene_l:
+    if gene_name in gene_list:
         correct = True
     else:
-        print("Chose a gene included in the following list:", gene_l, "\n")
+        print("Chose a gene included in the following list:", gene_list, "\n")
 
 id = genes[gene_name]
 
