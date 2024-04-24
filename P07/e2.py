@@ -13,5 +13,5 @@ print()
 print("Dictionary of Genes!")
 print(f"There are {len(genes)} genes in the dictionary: \n")
 
-for e in genes:
-    print(f"{e}: --> {genes[e]}")
+for gene in genes:
+    print(f"{gene}: --> {genes[gene]}")
