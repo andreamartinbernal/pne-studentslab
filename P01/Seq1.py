@@ -91,6 +91,32 @@ class Seq:
             self.strbases = complete_seq
 
 
+    def percentage_of_bases(self):
+        seq_length = self.seq_len()
+        dict_of_bases = {"A": 0, "T": 0, "C": 0, "G": 0}
+        percentage_of_each_base = {"A": 0, "T": 0, "C": 0, "G": 0}
+        if seq_length != 0:
+            for e in self.strbases:
+                dict_of_bases[e] += 1
+            for e in dict_of_bases:
+                percentage_of_each_base[e] = str(f"{round((dict_of_bases[e] / seq_length * 100), 1)}%")
+
+        return dict_of_bases, percentage_of_each_base
+
+
+    def most_frequent_base(self):
+        bases_count_dict = self.seq_count()
+        most_frequent_base = ""
+        max_nb_occurrences = 0
+        for base in bases_count_dict:
+            if bases_count_dict[base] > max_nb_occurrences:
+                max_nb_occurrences = bases_count_dict[base]
+                most_frequent_base = base
+        return most_frequent_base
+
+
+
+
 
 
 
