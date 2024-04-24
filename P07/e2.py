@@ -1,3 +1,5 @@
+import termcolor
+
 genes = {"FRAT1": "ENSG00000165879",
          "ADA": "ENSG00000196839",
          "FXN": "ENSG00000165060",
@@ -14,4 +16,5 @@ print("Dictionary of Genes!")
 print(f"There are {len(genes)} genes in the dictionary: \n")
 
 for gene in genes:
-    print(f"{gene}: --> {genes[gene]}")
+    termcolor.cprint(f"{gene}: --> ", 'green', end="", force_color=True)
+    print({genes[gene]})
