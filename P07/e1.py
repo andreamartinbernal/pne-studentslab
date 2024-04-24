@@ -10,7 +10,7 @@ print()
 print(f"Server: {SERVER}")
 print(f"URL: {URL}")
 
-conn = http.client. HTTPConnection(SERVER)
+conn = http.client.HTTPConnection(SERVER)
 
 try:
     conn.request("GET", ENDPOINT + PARAMS)
@@ -19,13 +19,13 @@ except ConnectionRefusedError:
     exit()
 
 # -- Read the response message from the server
-r1 = conn.getresponse()
+first_response = conn.getresponse()
 
 # -- Print the status line
-print(f"Response received!: {r1.status} {r1.reason}\n")
+print(f"Response received!: {first_response.status} {first_response.reason}\n")
 
 # -- Read the response's body
-response = json.loads(r1.read().decode("utf-8"))
+response = json.loads(first_response.read().decode("utf-8"))
 
 if response["ping"] == 1:
     print("PING OK! The database is running!")
