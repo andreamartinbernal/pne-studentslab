@@ -17,4 +17,4 @@ print(f"There are {len(genes)} genes in the dictionary: \n")
 
 for gene in genes:
     termcolor.cprint(f"{gene}: --> ", 'yellow', end="", force_color=True)
-    print({genes[gene]})
+    print(genes[gene])

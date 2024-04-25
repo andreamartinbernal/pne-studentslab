@@ -15,7 +15,7 @@ conn = http.client.HTTPConnection(SERVER)
 try:
     conn.request("GET", ENDPOINT + PARAMS)
 except ConnectionRefusedError:
-    print("ERROR! Cannot connect to the Server")
+    print("PING NOT OK! Cannot connect to the Server")
     exit()
 
 # -- Read the response message from the server
