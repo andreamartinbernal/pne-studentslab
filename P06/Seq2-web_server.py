@@ -4,6 +4,7 @@ import termcolor
 from pathlib import Path
 import jinja2 as j
 from urllib.parse import parse_qs, urlparse
+from pprint import pprint
 
 
 def read_html_file(filename):
@@ -21,30 +22,23 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         url_path = urlparse(self.path)
         path = url_path.path
         arguments = parse_qs(url_path.query)
-        print("ESTE ES EL URL PATH", url_path)
-        print("ESTOS SON LOS ARGUMENTOS", arguments)
         GENES = ["U5", "ADA", "FRAT1", "RNU6", "FXN"]
         termcolor.cprint(self.requestline, 'green')
-        if self.path == "/":
+        if path == "/":
             contents = Path('html/index.html').read_text()
-        elif self.path[:-1] == "/ping":
+        elif path == "/ping":
             contents = Path("html/ping.html").read_text()
-        elif self.path[:4] == "/get":
-            print("ESTE ES EL SELFF PATH", self.path)
-            print("ESTE ES EL INDICE", arguments['n'])
-            print("ESTE ES EL NUMERO", arguments['n'][0])
-            print("ESTE ES EL ELEMENTO", GENES[int(arguments['n'][0])])
-            for gene in GENES:
-                index = GENES.index(gene)
-                if 0 <= index <= 4:
-                    if self.path.endswith(f"{index}"):
-                        sequence = Path("..", "sequences", gene + ".txt").read_text().splitlines()
-                        sequence = sequence[1:]
-                        msg = ""
-                        for line in sequence:
-                            msg += line
-                        contents = read_html_file("get.html").render(context={"todisplay": str(msg), "sequence": str(index)})
-        elif self.path[:5] == "/gene":
+        elif path == "/get":
+            pprint(arguments)
+            gene_index = int(arguments["n"][0])
+            gene_name = GENES[gene_index]
+            sequence = Path("..", "sequences", gene_name + ".txt").read_text().splitlines()
+            sequence = sequence[1:]
+            msg = ""
+            for line in sequence:
+                msg += line
+            contents = read_html_file("get.html").render(context={"todisplay": msg, "sequence": str(gene_index)})
+        elif path == "/gene":
             for gene in GENES:
                 if self.path.endswith(f"{gene}"):
                     sequence = Path("..", "sequences", gene + ".txt").read_text().splitlines()
@@ -53,19 +47,20 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     for line in sequence:
                         msg += line
                     contents = read_html_file("gene.html").render(context={"todisplay": str(msg), "gene": str(gene)})
-        elif self.path.startswith("/operation"):
-            msg = arguments['msg'][0]
-            if self.path.endswith("Info"):
-                total_len = len(msg)
-                a_a = f"A: {msg.count('A')} ({((msg.count('A') / total_len) * 100):.1f}%)"
-                a_c = f"C: {msg.count('C')} ({((msg.count('C') / total_len) * 100):.1f}%)"
-                a_g = f"G: {msg.count('G')} ({((msg.count('G') / total_len) * 100):.1f}%)"
-                a_t = f"T: {msg.count('T')} ({((msg.count('T') / total_len) * 100):.1f}%)"
-                info_msg = f"Total length: {len(msg)}\n {a_a}\n {a_c}\n {a_g}\n {a_t}"
-                contents = read_html_file("operation.html").render(context={"result": info_msg, "operation": "info", "sequence": msg})
-            elif self.path.endswith("Comp"):
+        elif path == "/operation":
+            sequence_to_process = arguments['sequence'][0]
+            op_to_be_done = arguments['operationType'][0]
+            if op_to_be_done == "Info":
+                total_len = len(sequence_to_process)
+                a_a = f"A: {sequence_to_process.count('A')} ({((sequence_to_process.count('A') / total_len) * 100):.1f}%)"
+                a_c = f"C: {sequence_to_process.count('C')} ({((sequence_to_process.count('C') / total_len) * 100):.1f}%)"
+                a_g = f"G: {sequence_to_process.count('G')} ({((sequence_to_process.count('G') / total_len) * 100):.1f}%)"
+                a_t = f"T: {sequence_to_process.count('T')} ({((sequence_to_process.count('T') / total_len) * 100):.1f}%)"
+                info_msg = f"Total length: {len(sequence_to_process)}\n {a_a}\n {a_c}\n {a_g}\n {a_t}"
+                contents = read_html_file("operation.html").render(context={"result": info_msg, "operation": "info", "sequence": sequence_to_process})
+            elif op_to_be_done == "Comp":
                 complement = ""
-                for base in msg:
+                for base in sequence_to_process:
                         if base == "A":
                             complement += "T"
                         elif base == "G":
@@ -74,11 +69,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             complement += "G"
                         elif base == "T":
                             complement += "A"
-                contents = read_html_file("operation.html").render(context={"result": complement, "operation": "comp", "sequence": msg})
-            elif self.path.endswith("Rev"):
-                seq_n = msg[:len(msg)]
+                contents = read_html_file("operation.html").render(context={"result": complement, "operation": "comp", "sequence": sequence_to_process})
+            elif op_to_be_done == "Rev":
+                seq_n = sequence_to_process[:len(sequence_to_process)]
                 reverse = seq_n[::-1]
-                contents = read_html_file("operation.html").render(context={"result": reverse, "operation": "rev", "sequence": msg})
+                contents = read_html_file("operation.html").render(context={"result": reverse, "operation": "rev", "sequence": sequence_to_process})
         else:
             contents = Path("html/error.html").read_text()
             self.send_response(404)
