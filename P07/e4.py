@@ -23,7 +23,7 @@ while not correct:
     if gene_name in gene_list:
         correct = True
     else:
-        print("Chose a gene included in the following list:", gene_list, "\n")
+        print("Choose a gene included in the following list:", gene_list, "\n")
 
 id = genes[gene_name]
 
