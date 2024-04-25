@@ -99,7 +99,7 @@ class Seq:
             for e in self.strbases:
                 dict_of_bases[e] += 1
             for e in dict_of_bases:
-                percentage_of_each_base[e] = str(f"{round((dict_of_bases[e] / seq_length * 100), 1)}%")
+                percentage_of_each_base[e] = str(round((dict_of_bases[e] / seq_length * 100), 1))
 
         return dict_of_bases, percentage_of_each_base
 

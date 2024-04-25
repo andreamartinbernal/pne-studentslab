@@ -67,7 +67,7 @@ print(s.seq_len())
 bases_dict, percentage_of_each_base = s.percentage_of_bases()
 for e in bases_dict:
     termcolor.cprint(f"{e}: ", 'blue', end="", force_color=True)
-    print(bases_dict[e], f"({percentage_of_each_base[e]})")
+    print(bases_dict[e], f"({percentage_of_each_base[e]}%)")
 
 termcolor.cprint("Most frequent Base: ", 'green', end="", force_color=True)
 print(s.most_frequent_base())
