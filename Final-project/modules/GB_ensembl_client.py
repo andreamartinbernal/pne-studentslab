@@ -2,7 +2,7 @@ import pprint
 import http.client
 import json
 import termcolor
-from seq1 import *
+from seq1 import Seq
 
 ENSEMBL_SERVER = "rest.ensembl.org"
 PARAMS = "?content-type=application/json"
