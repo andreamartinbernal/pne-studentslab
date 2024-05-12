@@ -54,7 +54,6 @@ class GB_Handler(http.server.BaseHTTPRequestHandler):
             file_to_serve = HTML_FOLDER / "index.html"
             contents = file_to_serve.read_text("utf-8")
         elif parsed_path == "/favicon.ico":
-            print("hola fondo sur")
             favicon_path = GBSERVER_DIR / "resources/favicon.ico"
             self.path = str(favicon_path)
             self.send_response(200)
@@ -74,11 +73,13 @@ class GB_Handler(http.server.BaseHTTPRequestHandler):
             contents = gb_request_handler.getGeneInfo(rest_request, parsed_arguments)
         elif parsed_path == "/geneCalc":
             contents = gb_request_handler.getGeneCalc(rest_request, parsed_arguments)
+        elif parsed_path == "/geneList":
+            contents = gb_request_handler.getGeneList(rest_request, parsed_arguments)
         else:
             if rest_request:
                 contents = gb_request_handler.build_WrongRestEndpoint_rest_msg(parsed_path)
             else:
-                contents = gb_request_handler.build_WrongResource_html_page()
+                contents = gb_request_handler.build_WrongResource_html_page(parsed_path)
 
         # Generating the response message
         self.send_response(200)  # -- Status line: OK!
