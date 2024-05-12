@@ -79,3 +79,9 @@ def build_gene_calc_page(gene_name, gene_len, gene_bases_percentage):
     html_list = string_from_bases_percentage_dict(gene_bases_percentage)
     contents = read_html_file("GeneCalc.html").render(context={"gene_name": gene_name, "gene_len": gene_len, "gene_bases_percentage": html_list})
     return contents
+
+
+def build_gene_list_page(chromo, start, end, gene_list):
+    html_list = list_to_html_list(gene_list)
+    contents = read_html_file("GeneList.html").render(context={"chromo": chromo, "start": start, "end": end, "gene_list": html_list})
+    return contents
