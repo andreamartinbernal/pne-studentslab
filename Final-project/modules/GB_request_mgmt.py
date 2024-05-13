@@ -16,6 +16,7 @@ ENSEMBL_COMM_ERROR = "Communication problems with Ensembl"
 PAGEFILE_NOTFOUND_ERROR = "A required html file is not found"
 UNKNOWN_ERROR = "Unknown Error"
 WRONG_REST_ENDPOINT = "Wrong Rest Endpoint"
+HUMAN_KARYOTYPE = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "X", "Y"]
 
 def get_gene_calculations(gene_seq):
     seq = Seq(gene_seq)
@@ -276,7 +277,7 @@ class GB_request_handler (GB_req_forwarder.GB_request_forwarder):
             contents = super().build_error_response(rest_request, PARAMETER_ERROR, error_message)
             return contents
         if "start" not in parsed_arguments:
-            error_message = "Start must name must be specified."
+            error_message = "Start must be specified."
             contents = super().build_error_response(rest_request, PARAMETER_ERROR, error_message)
             return contents
         if "end" not in parsed_arguments:
@@ -285,6 +286,11 @@ class GB_request_handler (GB_req_forwarder.GB_request_forwarder):
             return contents
 
         chromo = parsed_arguments["chromo"][0]
+
+        if chromo not in HUMAN_KARYOTYPE:
+            error_message = f"The chromosome ({chromo}) you entered is not part of the human karyotype, try from 1 to 22, X or Y."
+            contents = super().build_error_response(rest_request, PARAMETER_ERROR, error_message)
+            return contents
 
         start_int = 0
         end_int = 0
