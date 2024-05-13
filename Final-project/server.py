@@ -54,6 +54,8 @@ class GB_Handler(http.server.BaseHTTPRequestHandler):
             file_to_serve = HTML_FOLDER / "index.html"
             contents = file_to_serve.read_text("utf-8")
         elif parsed_path == "/favicon.ico":
+            """TI tried to implant a concrete icon to appear in my web,
+            but finally I could not know how to do it"""
             favicon_path = GBSERVER_DIR / "resources/favicon.ico"
             self.path = str(favicon_path)
             self.send_response(200)
